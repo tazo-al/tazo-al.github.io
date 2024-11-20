@@ -4,7 +4,11 @@ import { SITE_METADATA } from "@/constants/metadata";
 import { getAllPosts } from "@/lib/posts";
 import TagList from "@/components/TagList";
 import Category from "@/components/category/Category";
-import { SearchParams } from "next/dist/server/request/search-params";
+
+interface PageSearchParams {
+  category?: string;
+  tag?: string;
+}
 
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
@@ -23,7 +27,11 @@ export const metadata: Metadata = {
   keywords: SITE_METADATA.keywords,
 };
 
-export default function Home({ searchParams }: { searchParams: SearchParams }) {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: PageSearchParams;
+}) {
   const category = searchParams?.category || "ALL";
   const tag = searchParams?.tag || "";
 

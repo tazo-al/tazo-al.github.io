@@ -10,6 +10,13 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   const { title, date, thumbnail, slug, description } = post;
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
+  };
+
   return (
     <article className="mt-10 w-full">
       <Link
@@ -21,9 +28,11 @@ export default function PostCard({ post }: PostCardProps) {
           <h2 className="mb-1.5 font-bold text-xl break-words overflow-hidden text-ellipsis group-hover:text-blue-500">
             {title}
           </h2>
-          <p className="text-grey-500 mb-4 font-normal text-[15px]">{description}</p>
+          <p className="text-grey-500 mb-4 font-normal text-[15px]">
+            {description}
+          </p>
           <span className="text-grey-700 font-normal text-[13px]">
-            {`${date} · ${SITE_METADATA.author}`}
+            {`${formatDate(date)} · ${SITE_METADATA.author}`}
           </span>
         </div>
         <div className="rounded-[20px] w-[130px] h-[90px] mb-auto overflow-hidden">

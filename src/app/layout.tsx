@@ -22,9 +22,7 @@ export default function RootLayout({
             {/* Header 높이만큼 pt 추가 */}
             {children}
           </main>
-          <footer className="py-8 text-center border-t">
-            © 2024 내 블로그
-          </footer>
+          <footer className="py-8 text-center border-t">© 2024 Tazoal</footer>
         </div>
       </body>
     </html>

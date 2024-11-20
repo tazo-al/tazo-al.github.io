@@ -36,7 +36,7 @@ export default function Header() {
     <header className="w-full h-[60px] fixed top-0 z-50 bg-white">
       <div className="w-[92%] h-full flex justify-between items-center mx-auto">
         <Link href={"/"}>
-          <p className="text-[24px] font-[700] italic hover:underline">
+          <p className="text-[24px] font-[700] italic hover:underline hover:underline-offset-2 pb-0.5">
             Tazoal<span className="text-blue-500">.</span>
           </p>
         </Link>
