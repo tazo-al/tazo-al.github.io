@@ -24,7 +24,10 @@ export default function PostHeader({
 
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag) => (
-            <span key={tag} className="px-2 py-1 bg-zinc-100 rounded-md text-zinc-600 text-sm">
+            <span
+              key={tag}
+              className="px-2 py-1 bg-zinc-100 rounded-md text-blue-600 text-sm"
+            >
               {tag}
             </span>
           ))}

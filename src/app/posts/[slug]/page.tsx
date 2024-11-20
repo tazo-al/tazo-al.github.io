@@ -40,20 +40,22 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(slug);
 
   return (
-    <div className="relative max-w-[1248px] mx-auto px-4">
-      <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
-        <PostHeader
-          title={post.title}
-          description={post.description}
-          date={post.date}
-          tags={post.tags}
-          category={post.category as "DEV" | "DAILY"}
-        />
-        <div className="relative">
-          <TableOfContents />
-          <PostBody content={post.content} />
+    <>
+      <PostHeader
+        title={post.title}
+        description={post.description}
+        date={post.date}
+        tags={post.tags}
+        category={post.category as "DEV" | "DAILY"}
+      />
+      <div className="relative max-w-[1248px] mx-auto px-4">
+        <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
+          <div className="relative">
+            <TableOfContents />
+            <PostBody content={post.content} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
