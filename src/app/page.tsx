@@ -30,35 +30,58 @@ type SearchParams = {
 
 type Props = {
   params: { slug: string };
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>; // Promise로 감싸기
 };
 
-export default function Home({
-  searchParams = { category: "ALL", tag: "", search: "" },
+export default async function Home({
+  // async 추가
+  searchParams,
 }: Props) {
-  const category = searchParams?.category || "ALL";
-  const tag = searchParams?.tag || "";
+  const { category = "ALL", tag = "", search = "" } = await searchParams;
 
-  const allPosts = getAllPosts()
-    .filter(
-      (post) => !category || category === "ALL" || post.category === category
-    )
-    .filter((post) => !tag || post.tags.includes(tag));
+  const allPosts = getAllPosts().filter((post) => {
+    if (search) {
+      const searchContent =
+        `${post.title} ${post.description} ${post.content}`.toLowerCase();
+      return searchContent.includes(search.toLowerCase());
+    }
+    return (
+      (!category || category === "ALL" || post.category === category) &&
+      (!tag || post.tags.includes(tag))
+    );
+  });
 
   const uniqueTags = [...new Set(allPosts.flatMap((post) => post.tags))];
 
   return (
     <main className="max-w-[1200px] mt-[60px] mx-auto min-h-[calc(100vh-200px)]">
+      {search && (
+        <div className="px-6 mb-8">
+          <h2 className="text-xl font-bold">
+            "{search}" 검색 결과
+            <span className="text-grey-500 ml-2 text-base font-normal">
+              {allPosts.length}개의 글
+            </span>
+          </h2>
+        </div>
+      )}
       <div className="w-full flex justify-evenly">
         <div className="flex flex-col justify-start items-center max-w-[700px] px-6 mx-auto">
-          <Category category={category} />
+          {!search && <Category category={category} />}
           {allPosts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
+          {allPosts.length === 0 && (
+            <p className="text-grey-500 text-center py-12">
+              검색 결과가 없습니다.
+            </p>
+          )}
         </div>
-        <aside className="px-6 pb-12 border-l border-grey-200 hidden lg:block mx-auto">
-          <TagList tags={uniqueTags} selectedTag={tag} category={category} />
-        </aside>
+        {!search && (
+          <aside className="px-6 pb-12 border-l border-grey-200 hidden lg:block mx-auto">
+            <TagList tags={uniqueTags} selectedTag={tag} category={category} />
+          </aside>
+        )}
       </div>
     </main>
   );
