@@ -4,6 +4,7 @@ import { SITE_METADATA } from "@/constants/metadata";
 import { getAllPosts } from "@/lib/posts";
 import TagList from "@/components/TagList";
 import Category from "@/components/category/Category";
+import { SearchParams } from "next/dist/server/request/search-params";
 
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
@@ -22,22 +23,16 @@ export const metadata: Metadata = {
   keywords: SITE_METADATA.keywords,
 };
 
-interface HomeProps {
-  searchParams: {
-    category?: string;
-    tag?: string;
-  };
-}
-
-export default async function Home({ searchParams }: HomeProps) {
+export default function Home({ searchParams }: { searchParams: SearchParams }) {
   const category = searchParams?.category || "ALL";
   const tag = searchParams?.tag || "";
 
-  const allPosts = getAllPosts();
-  // .filter((post) => !category || category === "ALL" || post.category === category)
-  // .filter((post) => !tag || post.tags.includes(tag));
+  const allPosts = getAllPosts()
+    .filter(
+      (post) => !category || category === "ALL" || post.category === category
+    )
+    .filter((post) => !tag || post.tags.includes(tag));
 
-  console.log(allPosts);
   const uniqueTags = [...new Set(allPosts.flatMap((post) => post.tags))];
 
   return (
