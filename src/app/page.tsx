@@ -22,16 +22,20 @@ export const metadata: Metadata = {
   keywords: SITE_METADATA.keywords,
 };
 
-interface PageSearchParams {
+type SearchParams = {
   category?: string;
   tag?: string;
-}
+  search?: string;
+};
 
-interface Props {
-  searchParams: PageSearchParams;
-}
+type Props = {
+  params: { slug: string };
+  searchParams: SearchParams;
+};
 
-export default async function Home({ searchParams }: Props) {
+export default function Home({
+  searchParams = { category: "ALL", tag: "", search: "" },
+}: Props) {
   const category = searchParams?.category || "ALL";
   const tag = searchParams?.tag || "";
 
