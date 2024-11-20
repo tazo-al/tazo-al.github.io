@@ -2,7 +2,7 @@ export const SITE_METADATA = {
   title: "Tazoal Log",
   description: "웹 프론트엔드 개발자 장원정입니다.",
   author: "장원정",
-  image: "/assets/images/profile.png",
+  image: "/images/common/profile.png",
   keywords: [
     "Tazoal Log",
     "Tazoal",

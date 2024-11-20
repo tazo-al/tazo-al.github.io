@@ -29,12 +29,15 @@ interface HomeProps {
   };
 }
 
-export default function Home({ searchParams }: HomeProps) {
-  const { category, tag } = searchParams;
-  const allPosts = getAllPosts()
-    .filter((post) => !category || category === "ALL" || post.category === category)
-    .filter((post) => !tag || post.tags.includes(tag));
+export default async function Home({ searchParams }: HomeProps) {
+  const category = searchParams?.category || "ALL";
+  const tag = searchParams?.tag || "";
 
+  const allPosts = getAllPosts();
+  // .filter((post) => !category || category === "ALL" || post.category === category)
+  // .filter((post) => !tag || post.tags.includes(tag));
+
+  console.log(allPosts);
   const uniqueTags = [...new Set(allPosts.flatMap((post) => post.tags))];
 
   return (

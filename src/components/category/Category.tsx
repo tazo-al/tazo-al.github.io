@@ -9,7 +9,7 @@ interface CategoryProps {
 export default function Category({ category = "ALL" }: CategoryProps) {
   return (
     <nav className="flex flex-col py-2.5 w-full">
-      <div className="relative flex max-w-full h-[47px] pb-0.5 border-b border-grey-200">
+      <div className="relative flex max-w-full h-[47px] border-b border-grey-200">
         {CATEGORIES.map((cat) => {
           const isSelected = cat.id === category;
 
