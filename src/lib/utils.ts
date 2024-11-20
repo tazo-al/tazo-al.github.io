@@ -1,17 +1,12 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import probe from "probe-image-size";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+// 클라이언트에서 사용할 유틸리티
+export function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 }
 
-export async function getImageSize(src: string) {
-  try {
-    const result = await probe(src);
-    return { width: result.width, height: result.height };
-  } catch (error) {
-    console.error("Error getting image size:", error);
-    return { width: 800, height: 600 }; // 기본값
-  }
+export function cn(...classes: (string | undefined)[]) {
+  return classes.filter(Boolean).join(" ");
 }

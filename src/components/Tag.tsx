@@ -1,36 +1,36 @@
+"use client";
+
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 interface TagProps {
-  tagName: string;
-  isSelected?: boolean;
+  tagName: string; // tag -> tagName으로 변경
   category?: string;
-  onRemove?: () => void;
+  isSelected?: boolean; // selected -> isSelected로 변경
 }
 
-export default function Tag({ tagName, isSelected, category, onRemove }: TagProps) {
-  const href = `/${isSelected ? "?" : "?tag=" + tagName + "&"}${
-    category ? "category=" + category : ""
-  }`;
-
+export default function Tag({
+  tagName,
+  category,
+  isSelected = false,
+}: TagProps) {
   return (
-    <div className="mb-2 mr-2 cursor-pointer w-fit inline-block">
-      <Link
-        href={href}
-        className={cn(
-          "rounded-[19px] inline-flex justify-center items-center font-semibold text-[13px] leading-[1.6] py-1 px-[10px]",
-          isSelected
-            ? "text-blue-500 bg-blue-50"
-            : "text-grey-500 bg-grey-100 hover:text-blue-500 hover:bg-grey-200"
-        )}
-      >
-        {`# ${tagName}`}
-        {isSelected && onRemove && (
-          <button onClick={onRemove} className="h-full w-4 ml-1">
-            x
-          </button>
-        )}
-      </Link>
-    </div>
+    <Link
+      href={{
+        pathname: "/",
+        query: {
+          ...(category && category !== "ALL" && { category }),
+          tag: tagName, // tag -> tagName으로 변경
+        },
+      }}
+      className={cn(
+        "px-2.5 py-1 text-[14px] rounded-full transition-colors",
+        isSelected
+          ? "bg-blue-500 text-white hover:bg-blue-600"
+          : "bg-grey-100 text-grey-500 hover:bg-grey-200"
+      )}
+    >
+      {tagName}
+    </Link>
   );
 }

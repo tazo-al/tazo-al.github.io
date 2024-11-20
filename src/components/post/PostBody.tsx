@@ -1,4 +1,4 @@
-import { getImageSize } from "@/lib/utils";
+import { getImageSize } from "@/lib/server-utils";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import rehypePrettyCode from "rehype-pretty-code";
