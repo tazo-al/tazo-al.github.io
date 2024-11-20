@@ -58,7 +58,7 @@ export default async function Home({
       {search && (
         <div className="px-6 mb-8">
           <h2 className="text-xl font-bold">
-            "{search}" 검색 결과
+            &ldquo;{search}&rdquo; 검색 결과
             <span className="text-grey-500 ml-2 text-base font-normal">
               {allPosts.length}개의 글
             </span>
