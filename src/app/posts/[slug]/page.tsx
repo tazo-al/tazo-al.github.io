@@ -5,26 +5,22 @@ import PostHeader from "@/components/post/PostHeader";
 import PostBody from "@/components/post/PostBody";
 import TableOfContents from "@/components/post/TableContent";
 
-interface Props {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  const allPosts = getAllPosts();
+  return allPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      images: post.thumbnail,
-    },
-  };
-}
-
-export default async function Post({ params }: Props) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -39,26 +35,25 @@ export default async function Post({ params }: Props) {
   };
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   return (
-    <>
-      <PostHeader
-        title={post.title}
-        description={post.description}
-        date={post.date}
-        tags={post.tags}
-        category={post.category as "DEV" | "DAILY"}
-      />
-      <div className="relative max-w-[1248px] mx-auto px-4">
-        <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
-          <div className="relative">
-            <TableOfContents />
-            <PostBody content={post.content} />
-          </div>
+    <div className="relative max-w-[1248px] mx-auto px-4">
+      <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
+        <PostHeader
+          title={post.title}
+          description={post.description}
+          date={post.date}
+          tags={post.tags}
+          category={post.category as "DEV" | "DAILY"}
+        />
+        <div className="relative">
+          <TableOfContents />
+          <PostBody content={post.content} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
