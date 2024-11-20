@@ -28,15 +28,17 @@ type SearchParams = {
   search?: string;
 };
 
-type Props = {
-  params: { slug: string };
-  searchParams: Promise<SearchParams>; // Promise로 감싸기
+type Params = {
+  slug: string;
 };
 
-export default async function Home({
-  // async 추가
-  searchParams,
-}: Props) {
+type Props = {
+  params: Promise<Params>;
+  searchParams: Promise<SearchParams>;
+};
+
+export default async function Home({ params, searchParams }: Props) {
+  const { slug } = await params;
   const { category = "ALL", tag = "", search = "" } = await searchParams;
 
   const allPosts = getAllPosts().filter((post) => {
