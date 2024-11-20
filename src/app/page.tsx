@@ -28,17 +28,11 @@ type SearchParams = {
   search?: string;
 };
 
-type Params = {
-  slug: string;
-};
-
 type Props = {
-  params: Promise<Params>;
   searchParams: Promise<SearchParams>;
 };
 
-export default async function Home({ params, searchParams }: Props) {
-  const { slug } = await params;
+export default async function Home({ searchParams }: Props) {
   const { category = "ALL", tag = "", search = "" } = await searchParams;
 
   const allPosts = getAllPosts().filter((post) => {
