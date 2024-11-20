@@ -5,11 +5,6 @@ import { getAllPosts } from "@/lib/posts";
 import TagList from "@/components/TagList";
 import Category from "@/components/category/Category";
 
-interface PageSearchParams {
-  category?: string;
-  tag?: string;
-}
-
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
@@ -27,11 +22,16 @@ export const metadata: Metadata = {
   keywords: SITE_METADATA.keywords,
 };
 
-export default function Home({
-  searchParams,
-}: {
+interface PageSearchParams {
+  category?: string;
+  tag?: string;
+}
+
+interface Props {
   searchParams: PageSearchParams;
-}) {
+}
+
+export default async function Home({ searchParams }: Props) {
   const category = searchParams?.category || "ALL";
   const tag = searchParams?.tag || "";
 
