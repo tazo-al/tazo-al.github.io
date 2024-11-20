@@ -5,21 +5,28 @@ import PostHeader from "@/components/post/PostHeader";
 import PostBody from "@/components/post/PostBody";
 import TableOfContents from "@/components/post/TableContent";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  const allPosts = getAllPosts();
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }));
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      images: post.thumbnail,
+    },
+  };
+}
+
+export default async function Post({ params }: Props) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   return {
     title: `TazoAL | ${post.title}`,
