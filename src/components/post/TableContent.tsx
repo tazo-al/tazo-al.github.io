@@ -14,11 +14,13 @@ export default function TableOfContents() {
 
   useEffect(() => {
     // h1, h2, h3 태그들을 찾아서 목차 아이템 생성
-    const elements = Array.from(document.querySelectorAll("h1, h2, h3")).map((element) => ({
-      id: element.id,
-      text: element.textContent || "",
-      level: Number(element.tagName.charAt(1)),
-    }));
+    const elements = Array.from(document.querySelectorAll("h1, h2, h3")).map(
+      (element) => ({
+        id: element.id,
+        text: element.textContent || "",
+        level: Number(element.tagName.charAt(1)),
+      })
+    );
 
     setHeadings(elements);
 
@@ -47,7 +49,13 @@ export default function TableOfContents() {
   }, []);
 
   return (
-    <nav className="lg:block fixed lg:top-36 lg:right-8 lg:w-64 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto w-full mt-4 max-w-[calc(100vw-320px)]">
+    <nav
+      className={`
+      xl:fixed xl:top-[450px] xl:right-[calc((100vw-1500px)/2)] xl:w-64 xl:max-h-[calc(100vh-200px)] xl:overflow-y-auto
+      lg:static lg:w-full lg:mt-8 lg:mb-8
+      w-full mt-4
+    `}
+    >
       <ul className="space-y-2 text-sm">
         {headings.map((heading) => (
           <li
@@ -65,7 +73,9 @@ export default function TableOfContents() {
                 });
               }}
               className={`block py-1 hover:text-blue-600 transition-colors ${
-                activeId === heading.id ? "text-blue-600 font-semibold" : "text-zinc-600"
+                activeId === heading.id
+                  ? "text-blue-600 font-semibold"
+                  : "text-zinc-600"
               }`}
             >
               {heading.text}

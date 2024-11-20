@@ -8,7 +8,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const borderStyle = {
-    background: `linear-gradient(to right, rgba(255, 84, 15, 1) ${scrollProgress}%, #e5e7eb ${scrollProgress}%)`,
+    background: `linear-gradient(to right, #3182f6 ${scrollProgress}%, #e5e7eb ${scrollProgress}%)`,
     height: "1px",
     width: "100%",
   };
@@ -16,7 +16,8 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const windowHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / windowHeight) * 100;
       setScrollProgress(scrollPercent);
     };
