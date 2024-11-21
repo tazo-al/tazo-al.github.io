@@ -42,7 +42,7 @@ export default async function PostPage({ params }: PageProps) {
   return (
     <>
       <div className="relative max-w-4xl mx-auto px-4">
-        <div className="relative xl:max-w-[896px] w-full mx-auto">
+        <div className="relative xl:max-w-[896px] w-full mx-auto pb-12">
           <div className="relative">
             <PostHeader
               title={post.title}
