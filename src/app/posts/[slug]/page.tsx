@@ -18,9 +18,7 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -48,7 +46,7 @@ export default async function PostPage({ params }: PageProps) {
         tags={post.tags}
         category={post.category as "DEV" | "DAILY"}
       />
-      <div className="relative max-w-[1248px] mx-auto px-4">
+      <div className="relative max-w-4xl mx-auto px-4">
         <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
           <div className="relative">
             <TableOfContents />
