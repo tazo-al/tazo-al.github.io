@@ -3,11 +3,16 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 
 export const metadata: Metadata = {
-  title: "내 블로그",
-  description: "개인 블로그입니다.",
+  title: "Tazoal Log",
+  description: "웹 프론트엔드 개발자 장원정입니다.",
+  authors: { name: "장원정", url: "https://github.com/tazoal" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="ko">
       <body>

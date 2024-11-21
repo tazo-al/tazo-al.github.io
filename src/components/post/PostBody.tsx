@@ -5,7 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 
 const components = {
-  img: async (props: any) => {
+  img: async function (props: any) {
     const { width, height } = await getImageSize(props.src);
 
     const maxWidth = 720;
@@ -39,17 +39,7 @@ const components = {
     );
   },
   a: (props: any) => {
-    return (
-      <a
-        {...props}
-        style={{
-          color: "#ff540f",
-          wordWrap: "break-word",
-          overflowWrap: "break-word",
-          wordBreak: "break-all",
-        }}
-      />
-    );
+    return <a {...props} className="text-blue-600 break-all" />;
   },
   h1: (props: any) => {
     const id = props.children.toLowerCase().replace(/\s+/g, "-");
