@@ -41,16 +41,16 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <>
-      <PostHeader
-        title={post.title}
-        description={post.description}
-        date={post.date}
-        tags={post.tags}
-        category={post.category as "DEV" | "DAILY"}
-      />
       <div className="relative max-w-4xl mx-auto px-4">
-        <div className="relative xl:max-w-[896px] w-full mx-auto py-12">
+        <div className="relative xl:max-w-[896px] w-full mx-auto">
           <div className="relative">
+            <PostHeader
+              title={post.title}
+              description={post.description}
+              date={post.date}
+              tags={post.tags}
+              category={post.category as "DEV" | "DAILY"}
+            />
             <TableOfContents />
             <PostBody content={post.content} />
           </div>

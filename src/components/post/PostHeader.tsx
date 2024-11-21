@@ -12,7 +12,7 @@ export default function PostHeader({
   category: "DEV" | "DAILY";
 }) {
   return (
-    <header className="w-full bg-zinc-50 py-12 mb-12 border-b border-zinc-200">
+    <header className="w-ful py-12 mb-12 border-b border-zinc-200">
       <div className="mx-auto max-w-4xl px-4">
         <div className="mb-4">
           <span className="text-blue-600 font-semibold">{category}</span>

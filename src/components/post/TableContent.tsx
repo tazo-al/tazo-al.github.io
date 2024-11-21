@@ -51,7 +51,7 @@ export default function TableOfContents() {
   return (
     <nav
       className={`
-      xl:fixed xl:top-[450px] xl:right-[calc((100vw-1500px)/2)] xl:w-64 xl:max-h-[calc(100vh-200px)] xl:overflow-y-auto
+      xl:fixed xl:top-[100px] xl:right-[calc((100vw-1500px)/2)] xl:w-64 xl:max-h-[calc(100vh-200px)] xl:overflow-y-auto
       lg:static lg:w-full lg:mt-8 lg:mb-8
       w-full mt-4
     `}
