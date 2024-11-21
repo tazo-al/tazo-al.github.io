@@ -18,15 +18,17 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
   return {
-    title: `TazoAL | ${post.title}`,
+    title: `Tazoal Log | ${post.title}`,
     description: post.description,
     openGraph: {
-      title: `TazoAL | ${post.title}`,
+      title: `Tazoal Log | ${post.title}`,
       description: post.description,
       images: "/images/og-image.png",
     },

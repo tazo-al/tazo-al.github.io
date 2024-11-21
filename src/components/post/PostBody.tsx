@@ -1,41 +1,11 @@
-import { getImageSize } from "@/lib/server-utils";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import Image from "next/image";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 
 const components = {
-  img: async function (props: any) {
-    const { width, height } = await getImageSize(props.src);
-
-    const maxWidth = 720;
-    const maxHeight = 420;
-    const ratioWidth = height / width;
-    const ratioHeight = width / height;
-
-    let adjustedWidth;
-    let adjustedHeight;
-
-    if (height > maxHeight) {
-      adjustedWidth = maxHeight * ratioHeight;
-      adjustedHeight = maxHeight;
-    } else if (height <= maxHeight && width > maxWidth) {
-      adjustedWidth = maxWidth;
-      adjustedHeight = maxWidth * ratioWidth;
-    } else {
-      adjustedWidth = width;
-      adjustedHeight = height;
-    }
-
+  img: function Image(props: any) {
     return (
-      <Image
-        {...props}
-        src={props.src}
-        alt={props.alt}
-        width={adjustedWidth}
-        height={adjustedHeight}
-        className="my-5 mx-auto rounded-lg"
-      />
+      <img {...props} className="rounded-lg my-4 mx-auto" loading="lazy" />
     );
   },
   a: (props: any) => {
